@@ -1,0 +1,22 @@
+{
+  "name": "ach",
+  "version": "0.0.0",
+  "description": "Connect middleware for setting Access-Control headers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stuartpb/ach.git"
+  },
+  "keywords": [
+    "access-control",
+    "middleware"
+  ],
+  "author": "Stuart P. Bentley <stuart@testtrack4.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stuartpb/ach/issues"
+  }
+}
