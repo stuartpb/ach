@@ -6,7 +6,7 @@ describe("using ach", function() {
   describe("with wildcard allowOrigin and allowCredentials", function() {
     var app = express();
 
-    app.use(ach());
+    app.use(ach({allowCredentials: true}));
     app.get('/', function(req, res) {
       res.send(200);
     });

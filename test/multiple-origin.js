@@ -7,7 +7,7 @@ describe("using ach", function() {
     "http://example.net'", function() {
     var app = express();
 
-    app.use(ach({exampleOrigin:
+    app.use(ach({allowOrigin:
       'http://example.com http://example.org http://example.net'}));
     app.get('/', function(req, res) {
       res.send(200);
