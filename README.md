@@ -19,19 +19,21 @@ credentials, or JSON POSTs).
 
 ## Does this prevent unauthorized requests to my domain?
 
-**No.** User agents other than conforming browsers (for instance, a request
-in Node.js) can make whatever requests they want, including any value for the
-Origin header that they wish.
-
-Responding with Access-Control headers only serves as a mechanism to
+**No.** Responding with Access-Control headers only serves as a mechanism to
 communicate to user's browsers when they should *allow* sites on other domains
-to make requests *from that user's browser* to your server. To be clear, these
-sites can already trigger simple requests to your domain from the browser:
-CORS only allows more complex requests through a mechanism like XmlHttpRequest
-that would otherwise be blocked by default.
+to make requests *from that user's browser* to your server. These sites can
+already trigger simple requests to your domain from the browser: CORS only
+allows more complex requests through a mechanism like XmlHttpRequest that would
+otherwise be blocked by default.
 
-If you need to actually *restrict* access to your server, you should look for
-a proper authentication mechanism such as OAuth.
+This is the standard-dictated behavior for browsers: other user agents (for
+instance, a request in Node.js) can make whatever requests they want, including
+any value for the Origin header that they wish.
+
+Actually *restricting* access to a server requires an authentication mechanism,
+the nature of which depends on who and what you're looking to restrict access
+*to*. For example, OAuth is a frequently implemented mechanism for
+authenticating API consumers.
 
 ## How do I use this?
 
