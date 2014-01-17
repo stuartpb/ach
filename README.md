@@ -15,6 +15,22 @@ credentials, or JSON POSTs).
 [Spec]: http://www.w3.org/TR/cors/
 [MDN]: https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS
 
+## Does this prevent unauthorized requests to my domain?
+
+**No.** User agents other than conforming browsers (for instance, a request
+in Node.js) can make whatever requests they want, including any value for the
+Origin header that they wish.
+
+Responding with Access-Control headers only serves as a mechanism to
+communicate to user's browsers when they should *allow* sites on other domains
+to make requests *from that user's browser* to your server. To be clear, these
+sites can already trigger simple requests to your domain from the browser:
+CORS only allows more complex requests through a mechanism like XmlHttpRequest
+that would otherwise be blocked by default.
+
+If you need to actually *restrict* access to your server, you should look for
+a proper authentication mechanism such as OAuth.
+
 ## How do I use this?
 
 To use ach with Express 0.3.x, mount it on whatever path you want to make
