@@ -1,4 +1,5 @@
 module.exports = function ach(options) {
+  options = options || {};
   var params = {};
   var paramKeys = ['allowOrigin','allowHeaders','allowCredentials',
     'allowMethods','exposeHeaders','maxAge'];
