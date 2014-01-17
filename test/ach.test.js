@@ -10,7 +10,7 @@ describe("using ach", function() {
     app.get('/', function(req, res) {
       res.send(200);
     });
-    
+
     describe('requests with no Origin', function() {
       it('should not receive Access-Control headers', function(done) {
         request(app)
@@ -25,6 +25,22 @@ describe("using ach", function() {
                   header + ' header present for originless request');
               }
             });
+            done();
+          });
+      });
+    });
+    
+    describe('requests with Origin set', function() {
+      it('should receive a wildcard Access-Control-Allow-Origin',
+        function(done) {
+
+        request(app)
+          .get('/')
+          .set('Origin','http://example.com')
+          .expect(200)
+          .expect('Access-Control-Allow-Origin','*')
+          .end(function(err, res) {
+            if (err) throw err;
             done();
           });
       });
