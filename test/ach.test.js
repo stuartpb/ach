@@ -1,10 +1,12 @@
 var request = require('supertest');
 var express = require('express');
+var ach = require('../index.js');
 
 describe("CORS headers", function() {
   describe("for ach defaults", function() {
     var app = express();
 
+    app.use(ach());
     app.get('/', function(req, res) {
       res.send(200);
     });
