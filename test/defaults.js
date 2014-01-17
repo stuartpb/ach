@@ -29,16 +29,32 @@ describe("using ach", function() {
           });
       });
     });
-    
+
     describe('requests with Origin set', function() {
       it('should receive a wildcard Access-Control-Allow-Origin',
         function(done) {
 
         request(app)
           .get('/')
-          .set('Origin','http://example.com')
+          .set('Origin', 'http://example.com')
           .expect(200)
-          .expect('Access-Control-Allow-Origin','*')
+          .expect('Access-Control-Allow-Origin', '*')
+          .end(function(err, res) {
+            if (err) throw err;
+            done();
+          });
+      });
+    });
+
+    describe('requests with Origin set', function() {
+      it('should receive the default Access-Control-Allow-Headers',
+        function(done) {
+
+        request(app)
+          .get('/')
+          .set('Origin', 'http://example.com')
+          .expect(200)
+          .expect('Access-Control-Allow-Headers', 'X-Requested-With')
           .end(function(err, res) {
             if (err) throw err;
             done();
