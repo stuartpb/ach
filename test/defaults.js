@@ -29,7 +29,6 @@ describe("using ach", function() {
           });
       });
     });
-
     describe('requests with Origin set', function() {
       it('should receive a wildcard Access-Control-Allow-Origin',
         function(done) {
@@ -44,9 +43,7 @@ describe("using ach", function() {
             done();
           });
       });
-    });
 
-    describe('requests with Origin set', function() {
       it('should receive the default Access-Control-Allow-Headers',
         function(done) {
 

@@ -3,10 +3,10 @@ var express = require('express');
 var ach = require('../index.js');
 
 describe("using ach", function() {
-  describe("with null allowOrigin", function() {
+  describe("with wildcard allowOrigin and allowCredentials", function() {
     var app = express();
 
-    app.use(ach({allowOrigin: null}));
+    app.use(ach());
     app.get('/', function(req, res) {
       res.send(200);
     });
@@ -30,19 +30,29 @@ describe("using ach", function() {
       });
     });
     describe('requests with Origin set', function() {
-      it('should not receive Access-Control headers', function(done) {
+      it('should receive requesting Access-Control-Allow-Origin',
+        function(done) {
+
         request(app)
           .get('/')
+          .set('Origin', 'http://example.com')
           .expect(200)
+          .expect('Access-Control-Allow-Origin', 'http://example.com')
           .end(function(err, res) {
             if (err) throw err;
+            done();
+          });
+      });
+      it('should receive Access-Control-Allow-Credentials=true',
+        function(done) {
 
-            Object.keys(res.header).forEach(function(header) {
-              if (/^access\-control/.test(header)) {
-                throw new Error (
-                  header + ' header present for originless list');
-              }
-            });
+        request(app)
+          .get('/')
+          .set('Origin', 'http://example.com')
+          .expect(200)
+          .expect('Access-Control-Allow-Credentials', 'true')
+          .end(function(err, res) {
+            if (err) throw err;
             done();
           });
       });
