@@ -1,5 +1,7 @@
 # ach
 
+[![Build Status](https://travis-ci.org/stuartpb/ach.png?branch=master)](https://travis-ci.org/stuartpb/ach)
+
 ach is a connect/express middleware generator for setting Access-Control
 headers for Cross-Origin Resource Sharing.
 
