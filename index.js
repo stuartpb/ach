@@ -35,40 +35,41 @@ module.exports = function ach(options) {
         || params.allowOrigin == '*' && params.allowCredentials;
       if (params.allowOrigin == '*' || matchOrigin) {
         if (matchOrigin) {
-          res.header("Access-Control-Allow-Origin", reqOrigin);
+          res.setHeader("Access-Control-Allow-Origin", reqOrigin);
           // If there are other potential results for this header
           if (params.allowOrigin.length > 1
           // and nobody's already set the "Origin" header in Vary
-          && (!res.get("Vary")
-            || res.get("Vary").split(/\s*,\s*/g).indexOf('Origin') == -1)) {
+          && (!res.getHeader("Vary")
+            || res.getHeader("Vary").split(/\s*,\s*/g)
+              .indexOf('Origin') == -1)) {
 
             // specify that the Origin header can vary the request
             // (on top of any other headers specified)
-            res.header("Vary", (res.get("Vary") ?
-              res.get("Vary") + ', ' : '') + "Origin");
+            res.setHeader("Vary", (res.getHeader("Vary") ?
+              res.getHeader("Vary") + ', ' : '') + "Origin");
           }
         } else {
-          res.header("Access-Control-Allow-Origin", "*");
+          res.setHeader("Access-Control-Allow-Origin", "*");
         }
 
         if (params.allowCredentials) {
-          res.header("Access-Control-Allow-Credentials", 'true');
+          res.setHeader("Access-Control-Allow-Credentials", 'true');
         }
         if (params.exposeHeaders) {
-          res.header("Access-Control-Expose-Headers", params.exposeHeaders);
+          res.setHeader("Access-Control-Expose-Headers", params.exposeHeaders);
         }
         if (params.maxAge) {
           // The spec says not to set this if the Origin doesn't match,
           // even though that seems like it would trigger a lot of unnecessary
           // preflight requests for bad origins to me.
           // I've emailed annevk for clarification.
-          res.header("Access-Control-Max-Age", params.maxAge);
+          res.setHeader("Access-Control-Max-Age", params.maxAge);
         }
         if (params.allowMethods) {
-          res.header("Access-Control-Allow-Methods", params.allowMethods);
+          res.setHeader("Access-Control-Allow-Methods", params.allowMethods);
         }
         if (params.allowHeaders) {
-          res.header("Access-Control-Allow-Headers", params.allowHeaders);
+          res.setHeader("Access-Control-Allow-Headers", params.allowHeaders);
         }
       }
     }
