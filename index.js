@@ -73,6 +73,6 @@ module.exports = function ach(options) {
         }
       }
     }
-    next();
+    next && next();
   };
 };
