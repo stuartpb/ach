@@ -89,21 +89,21 @@ the camelCased names take precedence: beyond that, the precedence is
 The origin or origins allowed to access this resource with CORS.
 
 This may be either an Array, a space-separated origin-list (including a single
-origin), '*' (signifying any domain), or 'null' / any other falsy value (which
+origin), `'*'` (signifying any domain), or `null` / any other falsy value (which
 will prevent the setting of Access-Control headers altogether, as mentioned
 above).
 
 When a request is sent with a `Origin` header specified, its match status
 against this option controls whether or not any headers will be sent.
 
-If allowOrigin is set to *, the headers will be sent: if accessCredentials is
-not a truthy value, 'Access-Control-Allow-Origin' will be sent as '*'. If
-accessCredentials is a truthy value, the 'Access-Control-Allow-Origin' header
+If allowOrigin is set to `'*'`, the headers will be sent: if allowCredentials
+is not a truthy value, 'Access-Control-Allow-Origin' will be sent as `*`. If
+allowCredentials is a truthy value, the 'Access-Control-Allow-Origin' header
 will be sent with the same value as the request's Origin header, as browsers
-do not trust the '*' origin with credentials.
+do not trust the `*` origin with credentials.
 
-Otherwise, the request's Origin will be compared against the specified list of
-origins (falsy values and 'null' are interpreted as an empty list). If the
+Otherwise, the request's `Origin` will be compared against the specified list of
+origins (falsy values and `null` are interpreted as an empty list). If the
 passed origin matches a value of the allowOrigin list, the Access-Control
 headers will be set, with Access-Control-Allow-Origin set to the value of the
 request's Origin (as browser implementations do not recognize origin lists in
@@ -114,7 +114,7 @@ header, unless that Origin is the only one allowed, ach will ensure that the
 response's `Vary` header includes `Origin` to inform caching systems not to
 cache the response for other origins.
 
-Note that, while allowOrigin accepts the wildcard value '*' in place of an
+Note that, while allowOrigin accepts the wildcard value `'*'` in place of an
 origin-list, listed origins *can not* use wildcards (if you wish to support
 multiple domains, ports, or HTTP-and/or-HTTPS, you must explicitly specify each
 origin). If you need wildcard matching for Origin, you're outside the CORS
@@ -127,7 +127,7 @@ Whether to allow requests with credentials (such as an XMLHttpRequest with
 `withCredentials` set to `true`), or (for GET requests with credentials),
 whether the client will be allowed to read the results of the request.
 
-Setting this changes the behavior of the wildcard ('*')
+Setting this changes the behavior of the wildcard (`'*'`)
 Access-Control-Allow-Origin header as described above.
 
 ### exposeHeaders
