@@ -23,7 +23,7 @@ credentials, or JSON POSTs).
 communicate to user's browsers when they should *allow* sites on other domains
 to make requests *from that user's browser* to your server. These sites can
 already trigger simple requests to your domain from the browser: CORS only
-allows more complex requests through a mechanism like XmlHttpRequest that would
+allows more complex requests through a mechanism like XMLHttpRequest that would
 otherwise be blocked by default.
 
 This is the standard-dictated behavior for browsers: other user agents (for
@@ -37,7 +37,7 @@ authenticating API consumers.
 
 ## How do I use this?
 
-To use ach with Express 0.3.x, mount it on whatever path you want to make
+To use ach with Express >=3.x, mount it on whatever path you want to make
 available with CORS, using either `app.use([prefix])` or `app.all(route)`,
 depending on when you want the middleware to run relative to Express's router.
 
@@ -50,10 +50,10 @@ app.get(function(req,res){res.send('You can read me anywhere!')});
 ## What does it do by default / how is it configurable?
 
 By default, ach sets the Access-Control-Allow-Origin to '*' (all servers) and
-the Access-Control-Allow-Headers to 'X-Requested-With' (to allow XmlHttpRequest
+the Access-Control-Allow-Headers to 'X-Requested-With' (to allow XMLHttpRequest
 to declare itself). Either of these can be overridden (these defaults are only
 set when their respective options are `undefined`; notably, if you set
-allowedOrigin to a different falsy value (such as `null`), you will stop any
+allowOrigin to a different falsy value (such as `null`), you will stop any
 CORS headers from being sent at all).
 
 ach allows you to set a number of headers relevant to the control of CORS to
@@ -123,8 +123,8 @@ to solve.
 
 ### allowCredentials
 
-Whether to allow requests with credentials (such as an XmlHttpRequest with
-`withCredentials` set to `true`), or (for GET requestw with credentials),
+Whether to allow requests with credentials (such as an XMLHttpRequest with
+`withCredentials` set to `true`), or (for GET requests with credentials),
 whether the client will be allowed to read the results of the request.
 
 Setting this changes the behavior of the wildcard ('*')
