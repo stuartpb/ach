@@ -17,7 +17,7 @@ credentials, or JSON POSTs).
 [Spec]: http://www.w3.org/TR/cors/
 [MDN]: https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS
 
-## Does this prevent unauthorized requests to my domain?
+## Does Cross-Origin Resource Sharing prevent unauthorized requests?
 
 **No.** Responding with Access-Control headers only serves as a mechanism to
 communicate to user's browsers when they should *allow* sites on other domains
@@ -47,14 +47,22 @@ app.use(require('ach')());
 app.get(function(req,res){res.send('You can read me anywhere!')});
 ```
 
+Note that attaching this middleware to a route for a *single method* (like
+`app.get`) will not work for [preflighted requests][], which make an `OPTIONS`
+request before making the preflighted request. You may work around this by
+attaching the middleware to a corresponding `app.options` route, but, for the
+simplest approach, attach it for all methods with `app.use` or `app.all`.
+
+[preflighted requests]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Preflighted_requests
+
 ## What does it do by default / how is it configurable?
 
-By default, ach sets the Access-Control-Allow-Origin to '*' (all servers) and
-the Access-Control-Allow-Headers to 'X-Requested-With' (to allow XMLHttpRequest
-to declare itself). Either of these can be overridden (these defaults are only
-set when their respective options are `undefined`; notably, if you set
-allowOrigin to a different falsy value (such as `null`), you will stop any
-CORS headers from being sent at all).
+By default, ach sets the Access-Control-Allow-Origin to `'*'` (all servers) and
+the Access-Control-Allow-Headers to `'X-Requested-With'` (to allow
+XMLHttpRequest to declare itself). Either of these can be overridden (these
+defaults are only set when their respective options are `undefined`; notably,
+if you set the `allowOrigin` option to a different falsy value (such as
+`null`), you will stop any CORS headers from being sent at all).
 
 ach allows you to set a number of headers relevant to the control of CORS to
 allow behaviors beyond the default. At runtime, ach tweaks the headers it sends
@@ -78,7 +86,7 @@ app.all('/api/*', require('ach')({
 
 ach recognizes option names as either JavaScript-conventional camelCase,
 or as case-insensitive Header-Style-Hyphen-Separation (optionally beginning
-with 'Access-Control'). In the presence of multiple equivalent options,
+with `Access-Control`). In the presence of multiple equivalent options,
 the camelCased names take precedence: beyond that, the precedence is
 *undefined*, so don't set different values for the same option.
 
