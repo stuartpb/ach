@@ -5,14 +5,14 @@
 ach is a connect/express middleware generator for setting Access-Control
 headers for Cross-Origin Resource Sharing.
 
-## What's CORS?
+## What is Cross-Origin Resource Sharing (CORS)?
 
-CORS is a set of headers you can set on the header to declare that it's OK for
-content on other origins (domains) to make certain requests to your site
+CORS is a set of headers you can set on a response to declare that it's OK
+for content on other origins (domains) to make certain requests to your site
 through the browser that would not normally be allowed (like requests with
-credentials, or JSON POSTs).
-
-[W3C Specification][Spec] [MDN documentation][MDN]
+credentials, or JSON POSTs), and to read the response from these cross-origin
+requests (which would normally be disallowed). See the
+[W3C Specification][Spec], and the [MDN documentation][MDN].
 
 [Spec]: http://www.w3.org/TR/cors/
 [MDN]: https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS
@@ -35,7 +35,7 @@ the nature of which depends on who and what you're looking to restrict access
 *to*. For example, OAuth is a frequently implemented mechanism for
 authenticating API consumers.
 
-## How do I use this?
+## Usage
 
 To use ach with Express >=3.x, mount it on whatever path you want to make
 available with CORS, using either `app.use([prefix])` or `app.all(route)`,
@@ -55,7 +55,7 @@ simplest approach, attach it for all methods with `app.use` or `app.all`.
 
 [preflighted requests]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Preflighted_requests
 
-## What does it do by default / how is it configurable?
+## Configuration
 
 By default, ach sets the Access-Control-Allow-Origin to `'*'` (all servers) and
 the Access-Control-Allow-Headers to `'X-Requested-With'` (to allow
